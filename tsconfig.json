@@ -46,7 +46,7 @@
     "skipLibCheck": true
   },
   "include": ["src/**/*"], // * add this 2 line to avoid the error in your code 
-  "exclude": ["node_modules", "dist", "src/generated"]
+  "exclude": ["node_modules", "dist", "generated/prisma"]
 
   // ! Must add this 2 line in your code and must make src/server.ts folder too avoid the error
 }
