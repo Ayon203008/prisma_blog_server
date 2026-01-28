@@ -43,10 +43,11 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
     autoSignIn:false,
-    requireEmailVerification:true
+    requireEmailVerification:false
   },
    emailVerification: {
     sendOnSignUp:true,
+    autoSignInAfterVerification:true,
     sendVerificationEmail: async ( { user, url, token }, request) => {
       const verificationEmail =`${process.env.APP_URL}/verify-email?token=${token}`
       const info = await transporter.sendMail({
@@ -59,4 +60,13 @@ export const auth = betterAuth({
       console.log("Message send",info.messageId)
     }
   },
+    socialProviders: {
+      // * This is for google login
+        google: { 
+            prompt:"select_account consent", // ask every time for differnent account
+            accessType:'offline',
+            clientId: process.env.GOOGLE_CLIENT_ID as string, 
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET as string, 
+        }, 
+    }
 });
