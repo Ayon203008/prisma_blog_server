@@ -46,8 +46,17 @@ export const auth = betterAuth({
     requireEmailVerification:true
   },
    emailVerification: {
+    sendOnSignUp:true,
     sendVerificationEmail: async ( { user, url, token }, request) => {
-      console.log("Verification email send ")
+      const verificationEmail =`${process.env.APP_URL}/verify-email?token=${token}`
+      const info = await transporter.sendMail({
+        from:'prisma Blog <paypal572874@gmail.com>',
+        to:user.email,
+        subject:"Am i that competant",
+        text:"I failed a thousands battle but not now ",
+        html:`<h1>Hello world </h1>`
+      })
+      console.log("Message send",info.messageId)
     }
   },
 });
