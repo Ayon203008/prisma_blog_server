@@ -6,14 +6,15 @@ import cors from 'cors'
 const app = express()
 
 app.use(cors({
-   origin:process.env.APP_URL ,
-   credentials:true
+    origin: process.env.APP_URL,
+    credentials: true
 }))
 
 app.use(express.json())
+
 app.all('/api/auth/{*any}', toNodeHandler(auth));
 
-app.use("/posts",postRouter)
+app.use("/posts", postRouter)
 
 app.get("/", (req, res) => {
     res.send("Hello world")
